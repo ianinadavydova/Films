@@ -7,8 +7,8 @@ import java.util.List;
 public class FilmCollection {
     private final List<Film> list = new ArrayList<>();
 
-    public void add(Film f) {
-        list.add(f);
+    public void add(Film film) {
+        list.add(film);
     }
 
     public int size() {
