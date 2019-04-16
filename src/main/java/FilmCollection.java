@@ -20,29 +20,24 @@ public class FilmCollection {
     }
 
     public void serialize(String filename) throws IOException {
-        FileOutputStream file = new FileOutputStream(filename);
-        ObjectOutputStream out = new ObjectOutputStream(file);
-
-        out.writeInt(list.size());
-        for (Film f : list)
-            out.writeObject(f);
-
-        out.close();
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
+            out.writeInt(list.size());
+            for (Film f : list)
+                out.writeObject(f);
+        }
     }
 
     public static FilmCollection deserialize(String filename) throws IOException, ClassNotFoundException {
-        FileInputStream file = new FileInputStream(filename);
-        ObjectInputStream in = new ObjectInputStream(file);
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
+            FilmCollection result = new FilmCollection();
+            int n = in.readInt();
 
-        FilmCollection result = new FilmCollection();
-        int n = in.readInt();
+            for (int i = 0; i != n; ++i) {
+                result.add((Film) in.readObject());
+            }
 
-        for (int i = 0; i != n; ++i) {
-            result.add((Film) in.readObject());
+            return result;
         }
-
-        in.close();
-        return result;
     }
 
 }
