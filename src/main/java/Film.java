@@ -4,15 +4,15 @@ import java.io.Serializable;
 
 public class Film implements Serializable {
     private final String title;
-    private final Actor mainActor;
+    private final Actor[] actors;
 
-    public Film(String title, Actor mainActor) {
+    public Film(String title, Actor... actors) {
         this.title = title;
-        this.mainActor = mainActor;
+        this.actors = actors;
     }
 
-    public Actor getMainActor() {
-        return mainActor;
+    public Actor[] getActors() {
+        return actors;
     }
 
     public String getTitle() {

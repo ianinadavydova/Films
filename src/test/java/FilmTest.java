@@ -7,8 +7,9 @@ import static org.junit.Assert.assertEquals;
 
 public class FilmTest {
     private final String title = "Scherlock";
-    private final Actor actor = new Actor("Benedict Cumberbatch");
-    private final Film film = new Film(title, actor);
+    private final Actor holmes = new Actor("Benedict Cumberbatch");
+    private final Actor watson = new Actor("Matrin Friman");
+    private final Film film = new Film(title, holmes, watson);
 
     @Test
     public void getTitle() {
@@ -17,6 +18,9 @@ public class FilmTest {
 
     @Test
     public void getMainActor() {
-        assertEquals(actor, film.getMainActor());
+        Actor[] actors = film.getActors();
+        assertEquals(actors.length, 2);
+        assertEquals(actors[0], holmes);
+        assertEquals(actors[1], watson);
     }
 }
